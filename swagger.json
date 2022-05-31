@@ -1,0 +1,212 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Socar Sample Task",
+    "description": "Car Renting Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "API for users in the system"
+    }
+  ],
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "login": {
+      "post": {
+        "tags": ["Users"],
+        "description": "Sign in using email and password",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "name": "SignIn Parameters",
+            "in": "body",
+            "description": "Get user Details from Database",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/login"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/signup": {
+      "post": {
+        "tags": ["Users"],
+        "description": "Create new user in system",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New user is created",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get all users in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Users"
+            }
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "ID of user that we want to find",
+          "type": "integer"
+        }
+      ],
+      "delete": {
+        "summary": "Delete user with given ID",
+        "tags": ["Users"],
+        "responses": {
+          "200": {
+            "description": "User is deleted",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update user with give ID",
+        "tags": ["Users"],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/updateUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User is updated",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "login": {
+      "properties": {
+        "email": {
+          "required": true,
+          "type": "string",
+          "example": "abc@gmail.com"
+        },
+        "password": {
+          "required": true,
+          "type": "string",
+          "example": "12345"
+        }
+      }
+    },
+    "User": {
+      "required": ["name", "email", "permission", "role", "password"],
+      "properties": {
+        "email": {
+          "type": "string",
+          "example": "abc@gmail.com",
+          "uniqueItems": true
+        },
+        "role": {
+          "type": "string"
+        },
+        "permission": {
+          "type": "string",
+          "example": "all/edit/view"
+        },
+        "password": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "updateUser": {
+      "required": ["name", "companies"],
+      "properties": {
+        "isPublic": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "books": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "amount": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "companies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Users": {
+      "type": "array",
+      "$ref": "#/definitions/User"
+    }
+  },
+  "Bearer": {
+    "type": "apiKey",
+    "name": "authorization",
+    "in": "header"
+  }
+}
