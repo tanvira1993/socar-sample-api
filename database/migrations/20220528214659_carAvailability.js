@@ -1,7 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable("car_availability", function (table) {
     table.increments("id").primary();
-    table.integer("car_id").unsigned();
+    table.integer("car_id").unsigned().unique().notNullable();
     table.timestamp("start_at").notNullable();
     table.timestamp("end_at").notNullable();
     table.timestamp("created_at").defaultTo(knex.raw("now()"));

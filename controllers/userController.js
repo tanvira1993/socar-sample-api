@@ -199,10 +199,16 @@ exports.userDelete = async (req, res) => {
     knex("users")
       .where("id", req.params.id)
       .del()
-      .then((r) => {
-        res.status(200).json({
-          message: "user deleted!",
-        });
+      .then((data) => {
+        if (data === 0) {
+          res.status(200).json({
+            message: "user not Found!",
+          });
+        } else {
+          res.status(200).json({
+            message: "user deleted!",
+          });
+        }
       })
       .catch((e) => {
         res.status(400).json({
@@ -234,9 +240,15 @@ exports.userUpdate = (req, res) => {
         role: role,
       })
       .then((data) => {
-        res.status(200).json({
-          message: "User successfully updated.",
-        });
+        if (data === 0) {
+          res.status(200).json({
+            message: "User has not been updated.",
+          });
+        } else {
+          res.status(200).json({
+            message: "User successfully updated.",
+          });
+        }
       })
       .catch((e) => {
         res.status(400).json({

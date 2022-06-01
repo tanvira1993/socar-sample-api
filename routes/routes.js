@@ -3,11 +3,14 @@ const router = express.Router();
 const middleware = require("../middlewares/authenticate");
 const validation = require("../middlewares/validations");
 const userController = require("../controllers/userController");
+const carController = require("../controllers/carController");
+const carAvController = require("../controllers/carAvailabilityController");
 
 router.post(
   "/signup",
   validation.signUpSchema,
   validation.validateRequestSchema,
+  middleware,
   userController.signup
 );
 router.post("/login", userController.login);
@@ -22,10 +25,40 @@ router.put(
   userController.userUpdate
 );
 
-// router.post("/post", middleware, postController.post);
-// router.get("/posts", middleware, postController.posts);
-// router.put("/upvote", middleware, postController.upvote);
-// router.put("/downvote", middleware, postController.downvote);
-// router.post("/comment", middleware, postController.comment);
+router.post(
+  "/car",
+  validation.carSchema,
+  validation.validateRequestSchema,
+  middleware,
+  carController.carCreate
+);
+router.get("/cars", middleware, carController.cars);
+router.get("/car/:id", middleware, carController.car);
+router.delete("/car/:id", middleware, carController.carDelete);
+router.put(
+  "/car/:id",
+  validation.carUpdateSchema,
+  validation.validateRequestSchema,
+  middleware,
+  carController.carUpdate
+);
+
+router.post(
+  "/carav",
+  validation.caravSchema,
+  validation.validateRequestSchema,
+  middleware,
+  carAvController.caravCreate
+);
+router.get("/carsav", middleware, carAvController.carsav);
+router.get("/carav/:id", middleware, carAvController.carav);
+router.delete("/carav/:id", middleware, carAvController.caravDelete);
+router.put(
+  "/carav/:id",
+  validation.caravUpdateSchema,
+  validation.validateRequestSchema,
+  middleware,
+  carAvController.caravUpdate
+);
 
 module.exports = router;
