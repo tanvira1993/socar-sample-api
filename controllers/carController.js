@@ -22,6 +22,7 @@ exports.carCreate = (req, res) => {
     year,
     day_price,
     geolocation,
+    is_featured,
   } = req.body;
   try {
     knex("cars")
@@ -34,7 +35,7 @@ exports.carCreate = (req, res) => {
           year: year,
           day_price: day_price,
           geolocation: geolocation,
-          is_featured: false,
+          is_featured: is_featured,
         },
       ])
       .then((data) => {
@@ -188,6 +189,7 @@ exports.carUpdate = (req, res) => {
     day_price,
     geolocation,
     is_featured,
+    user_id,
   } = req.body;
   try {
     knex("cars")
@@ -200,6 +202,7 @@ exports.carUpdate = (req, res) => {
         day_price: day_price,
         geolocation: geolocation,
         is_featured: is_featured,
+        user_id: user_id,
       })
       .then((data) => {
         if (data === 0) {

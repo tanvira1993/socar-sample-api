@@ -73,17 +73,17 @@ exports.carSchema = [
     });
   }),
   body("brand")
-    .isLength({ min: 3 })
-    .withMessage("Brand must be at least 3 characters long"),
+    .isLength({ min: 1 })
+    .withMessage("Brand must be at least 1 characters long"),
   body("build")
-    .isLength({ min: 3 })
-    .withMessage("build must be at least 3 characters long"),
+    .isLength({ min: 1 })
+    .withMessage("build must be at least 1 characters long"),
   body("year")
     .isLength({ min: 3 })
     .withMessage("Year must be at least 3 characters long"),
   body("model")
-    .isLength({ min: 3 })
-    .withMessage("Model must be at least 3 characters long"),
+    .isLength({ min: 1 })
+    .withMessage("Model must be at least 1 characters long"),
   body("geolocation")
     .isLength({ min: 3 })
     .withMessage("Location must be at least 3 characters long"),
@@ -92,17 +92,17 @@ exports.carSchema = [
 
 exports.carUpdateSchema = [
   body("brand")
-    .isLength({ min: 3 })
-    .withMessage("Brand must be at least 3 characters long"),
+    .isLength({ min: 1 })
+    .withMessage("Brand must be at least 1 characters long"),
   body("build")
-    .isLength({ min: 3 })
-    .withMessage("build must be at least 3 characters long"),
+    .isLength({ min: 1 })
+    .withMessage("build must be at least 1 characters long"),
   body("year")
     .isLength({ min: 3 })
     .withMessage("Year must be at least 3 characters long"),
   body("model")
-    .isLength({ min: 3 })
-    .withMessage("Model must be at least 3 characters long"),
+    .isLength({ min: 1 })
+    .withMessage("Model must be at least 1 characters long"),
   body("geolocation")
     .isLength({ min: 3 })
     .withMessage("Location must be at least 3 characters long"),
