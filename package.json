@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
     "migrate": "knex migrate:latest",
-    "make": "knex migrate:make"
+    "make": "knex migrate:make",
+    "makeseed": "knex seed:make",
+    "seed": "knex seed:run"
   },
   "author": "Tanvir Ahamed",
   "license": "ISC",
