@@ -41,7 +41,7 @@ yarn start
 
 ```
 email: "admin@gmail.com",
-          password: '12345678',
+password: '12345678',
 
 ```
 

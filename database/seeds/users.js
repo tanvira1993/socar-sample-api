@@ -9,22 +9,16 @@ exports.seed = async function (knex) {
   const password = "12345678";
   // Deletes ALL existing entries
   await knex("users").del();
+  let pass = await bcrypt.hash(password, saltRounds);
 
-  bcrypt
-    .hash(password, saltRounds)
-    .then(function (hash) {
-      knex("users").insert([
-        {
-          email: "admin@gmail.com",
-          password: hash,
-          name: "Admin",
-          permission: "all",
-          role: "Manager",
-          is_active: 1,
-        },
-      ]);
-    })
-    .catch((err) => {
-      console.log.log("seed error", err);
-    });
+  await knex("users").insert([
+    {
+      email: "admin@gmail.com",
+      password: pass,
+      name: "Admin",
+      permission: "all",
+      role: "Manager",
+      is_active: 1,
+    },
+  ]);
 };
