@@ -21,7 +21,7 @@
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "login": {
+    "/login": {
       "post": {
         "tags": ["Users"],
         "description": "Sign in using email and password",

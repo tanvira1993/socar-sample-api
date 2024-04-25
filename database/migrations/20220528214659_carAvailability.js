@@ -3,7 +3,9 @@ exports.up = function (knex) {
     table.increments("id").primary();
     table.integer("car_id").unsigned().unique().notNullable();
     table.timestamp("start_at").notNullable();
-    table.timestamp("end_at").notNullable();
+    // table.timestamp("end_at").notNullable();
+    table.timestamp('end_at').nullable(); // Making the column nullable
+
     table.timestamp("created_at").defaultTo(knex.raw("now()"));
     table.timestamp("updated_at").nullable();
     table.boolean("is_active").defaultTo(true);
